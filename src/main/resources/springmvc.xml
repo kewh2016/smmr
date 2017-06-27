@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
@@ -18,15 +17,17 @@
 			</list>
 		</property>
 	</bean>
-	<!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="messageConverters">
-			<list>
-				<ref bean="mappingJackson2HttpMessageConverter" />	<!-- JSON转换器 -->
-			</list>
-		</property>
-	</bean>
+	<mvc:resources mapping="/js/**" location="/resources/js/" />
+	<mvc:resources mapping="/styles/**" location="/resources/css/" />
+	<mvc:resources mapping="/images/**" location="/resources/images/" />
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/login" />
+			<mvc:exclude-mapping path="/logout" />
+			<bean class="com.kwh.interceptor.AuthenticationInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	<!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
