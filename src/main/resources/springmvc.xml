@@ -17,9 +17,10 @@
 			</list>
 		</property>
 	</bean>
-	<mvc:resources mapping="/js/**" location="/resources/js/" />
-	<mvc:resources mapping="/styles/**" location="/resources/css/" />
-	<mvc:resources mapping="/images/**" location="/resources/images/" />
+	<mvc:resources location="/" mapping="/**/*.js" />
+	<mvc:resources location="/" mapping="/**/*.css" />
+	<mvc:resources location="/" mapping="/**/*.gif" />
+	<mvc:resources location="/" mapping="/**/*.png" />
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
@@ -28,6 +29,7 @@
 			<bean class="com.kwh.interceptor.AuthenticationInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
+
 	<!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

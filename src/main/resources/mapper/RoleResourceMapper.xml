@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.kwh.dao.RoleResourceMapper" >
   <resultMap id="BaseResultMap" type="com.kwh.entity.RoleResource" >
-    <id column="ID" property="id" jdbcType="BIGINT" />
     <result column="ROLE_ID" property="roleId" jdbcType="BIGINT" />
     <result column="RESOUCE_ID" property="resouceId" jdbcType="BIGINT" />
   </resultMap>
@@ -65,7 +64,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ID, ROLE_ID, RESOUCE_ID
+    ROLE_ID, RESOUCE_ID
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.kwh.entity.RoleResourceExample" >
     select
@@ -81,16 +80,6 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_role_resource
-    where ID = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from t_role_resource
-    where ID = #{id,jdbcType=BIGINT}
-  </delete>
   <delete id="deleteByExample" parameterType="com.kwh.entity.RoleResourceExample" >
     delete from t_role_resource
     <if test="_parameter != null" >
@@ -98,17 +87,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.kwh.entity.RoleResource" >
-    insert into t_role_resource (ID, ROLE_ID, RESOUCE_ID
-      )
-    values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{resouceId,jdbcType=BIGINT}
-      )
+    insert into t_role_resource (ROLE_ID, RESOUCE_ID)
+    values (#{roleId,jdbcType=BIGINT}, #{resouceId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.kwh.entity.RoleResource" >
     insert into t_role_resource
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        ID,
-      </if>
       <if test="roleId != null" >
         ROLE_ID,
       </if>
@@ -117,9 +101,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="roleId != null" >
         #{roleId,jdbcType=BIGINT},
       </if>
@@ -137,9 +118,6 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update t_role_resource
     <set >
-      <if test="record.id != null" >
-        ID = #{record.id,jdbcType=BIGINT},
-      </if>
       <if test="record.roleId != null" >
         ROLE_ID = #{record.roleId,jdbcType=BIGINT},
       </if>
@@ -153,29 +131,10 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update t_role_resource
-    set ID = #{record.id,jdbcType=BIGINT},
-      ROLE_ID = #{record.roleId,jdbcType=BIGINT},
+    set ROLE_ID = #{record.roleId,jdbcType=BIGINT},
       RESOUCE_ID = #{record.resouceId,jdbcType=BIGINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.kwh.entity.RoleResource" >
-    update t_role_resource
-    <set >
-      <if test="roleId != null" >
-        ROLE_ID = #{roleId,jdbcType=BIGINT},
-      </if>
-      <if test="resouceId != null" >
-        RESOUCE_ID = #{resouceId,jdbcType=BIGINT},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.kwh.entity.RoleResource" >
-    update t_role_resource
-    set ROLE_ID = #{roleId,jdbcType=BIGINT},
-      RESOUCE_ID = #{resouceId,jdbcType=BIGINT}
-    where ID = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

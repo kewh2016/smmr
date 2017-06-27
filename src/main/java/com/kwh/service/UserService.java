@@ -11,8 +11,6 @@ public interface UserService {
 	 * @return
 	 */
 	boolean authentication(String userNo, String password);
-
-	User getUserByUserNo(String userNo);
 	
 	/**
 	 * 注销
@@ -20,4 +18,8 @@ public interface UserService {
 	 * @return
 	 */
 	void cancellation(String userNo);
+
+	User getUserByUserNo(String userNo);
+	
+	User getCurrentUser();
 }

@@ -30,10 +30,7 @@ public class UserServiceImpl implements UserService {
 		if (user == null)
 			return false;
 		if (DigestUtils.sha256Hex(password + userNo).equals(user.getPassword())) {
-			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
-					.getRequest();
-			HttpSession session = request.getSession();
-			session.setAttribute(UserConstants.SESSION_USER, user);
+			getSession().setAttribute(UserConstants.SESSION_USER, user);
 			return true;
 		}
 		return false;
@@ -41,10 +38,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void cancellation(String userNo) {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
-				.getRequest();
-		HttpSession session = request.getSession();
-		session.removeAttribute(UserConstants.SESSION_USER);
+		getSession().removeAttribute(UserConstants.SESSION_USER);
 	}
 
 	@Override
@@ -53,6 +47,17 @@ public class UserServiceImpl implements UserService {
 		userExample.createCriteria().andUserNoEqualTo(userNo);
 		List<User> users = userMapper.selectByExample(userExample);
 		return CollectionUtils.isEmpty(users) ? null : users.get(0);
+	}
+
+	@Override
+	public User getCurrentUser() {
+		return (User) getSession().getAttribute(UserConstants.SESSION_USER);
+	}
+
+	private HttpSession getSession() {
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
+				.getRequest();
+		return request.getSession();
 	}
 
 }

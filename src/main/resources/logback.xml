@@ -2,11 +2,11 @@
 <configuration>
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">
-			<pattern>%-20(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{80} - %msg%n</pattern>
+			<pattern>%-12d{HH:mm:ss.SSS}|%-5level|%-45logger{45}|%m%n</pattern>
 		</layout>
 	</appender>
-	<logger name="com.suning.dao" level="DEBUG" />
-	<root level="INFO">
+	<logger name="com.suning.dao" level="debug" />
+	<root level="debug">
 		<appender-ref ref="stdout" />
 	</root>
 </configuration>
