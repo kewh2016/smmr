@@ -6,31 +6,31 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.kwh.dao.ResourceMapper;
-import com.kwh.entity.Resource;
+import com.kwh.dao.RoleMapper;
+import com.kwh.entity.Role;
 
 @Controller
-@RequestMapping("/resource")
-public class ResourceController {
+@RequestMapping("/role")
+public class RoleController {
+
 
 	@Autowired
-	private ResourceMapper resourceMapper;
+	private RoleMapper roleMapper;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
-		model.addAttribute("resources", resourceMapper.selectByExample(null));
-		return "resource/list";
+		model.addAttribute("roles", roleMapper.selectByExample(null));
+		return "role/list";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String addUser(Model model) {
-		model.addAttribute("resources", resourceMapper.selectByExample(null));
-		return "resource/add";
+	public String addUser() {
+		return "role/add";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addUser(Resource resource) {
-		resourceMapper.insert(resource);
+	public String addUser(Role role) {
+		roleMapper.insert(role);
 		return "redirect:list";
 	}
 }

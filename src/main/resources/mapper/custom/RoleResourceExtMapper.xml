@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kwh.dao.custom.RoleResourceExtMapper">
+	<select id="getRoleResources" resultType="java.util.Map">
+		select
+			role.id as "roleId",
+			role.role_name as "roleName",
+			resource.id as "resourceId",
+			resource.resource_name as "resourceName"
+		from
+			t_role role,
+			t_resource resource,
+			t_role_resource roleResource
+		where 
+			role.id = roleResource.role_id
+		and 
+			resource.id = roleResource.resource_id
+		<if test="roleId != null">
+			and role.id = #{roleId}
+		</if>
+	</select>
+	
+	<select id="getRoleNotAllowResources" resultType="java.util.Map">
+		select
+			resource.id as "resourceId",
+			resource.resource_name as "resourceName"
+		from
+			t_resource resource
+		where 
+			resource.id not in
+		(
+			select 
+				roleResource.resource_id
+			from 
+				t_role_resource roleResource
+			where 
+				roleResource.role_id = #{roleId}
+		) 
+	</select>
+</mapper>

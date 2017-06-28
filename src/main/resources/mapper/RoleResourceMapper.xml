@@ -3,7 +3,7 @@
 <mapper namespace="com.kwh.dao.RoleResourceMapper" >
   <resultMap id="BaseResultMap" type="com.kwh.entity.RoleResource" >
     <result column="ROLE_ID" property="roleId" jdbcType="BIGINT" />
-    <result column="RESOUCE_ID" property="resouceId" jdbcType="BIGINT" />
+    <result column="RESOURCE_ID" property="resourceId" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -64,7 +64,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ROLE_ID, RESOUCE_ID
+    ROLE_ID, RESOURCE_ID
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.kwh.entity.RoleResourceExample" >
     select
@@ -87,8 +87,8 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.kwh.entity.RoleResource" >
-    insert into t_role_resource (ROLE_ID, RESOUCE_ID)
-    values (#{roleId,jdbcType=BIGINT}, #{resouceId,jdbcType=BIGINT})
+    insert into t_role_resource (ROLE_ID, RESOURCE_ID)
+    values (#{roleId,jdbcType=BIGINT}, #{resourceId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.kwh.entity.RoleResource" >
     insert into t_role_resource
@@ -96,16 +96,16 @@
       <if test="roleId != null" >
         ROLE_ID,
       </if>
-      <if test="resouceId != null" >
-        RESOUCE_ID,
+      <if test="resourceId != null" >
+        RESOURCE_ID,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="roleId != null" >
         #{roleId,jdbcType=BIGINT},
       </if>
-      <if test="resouceId != null" >
-        #{resouceId,jdbcType=BIGINT},
+      <if test="resourceId != null" >
+        #{resourceId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -121,8 +121,8 @@
       <if test="record.roleId != null" >
         ROLE_ID = #{record.roleId,jdbcType=BIGINT},
       </if>
-      <if test="record.resouceId != null" >
-        RESOUCE_ID = #{record.resouceId,jdbcType=BIGINT},
+      <if test="record.resourceId != null" >
+        RESOURCE_ID = #{record.resourceId,jdbcType=BIGINT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -132,7 +132,7 @@
   <update id="updateByExample" parameterType="map" >
     update t_role_resource
     set ROLE_ID = #{record.roleId,jdbcType=BIGINT},
-      RESOUCE_ID = #{record.resouceId,jdbcType=BIGINT}
+      RESOURCE_ID = #{record.resourceId,jdbcType=BIGINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

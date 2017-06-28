@@ -8,15 +8,11 @@
 <title>添加用户</title>
 </head>
 <body>
-	<form action="addRole" method="post">
+	<form action="${base}/role/add" method="post">
 		<table>
 			<tr>
 				<td>角色名</td>
-				<td><select name="roleId">
-						<c:forEach items="${roles}" var="role">
-							<option value="${role.id }">${role.roleName}</option>
-						</c:forEach>
-				</select></td>
+				<td><input name="roleName" /></td>
 			</tr>
 			<tr>
 				<td></td>

@@ -3,7 +3,7 @@ package com.kwh.entity;
 public class RoleResource {
     private Long roleId;
 
-    private Long resouceId;
+    private Long resourceId;
 
     public Long getRoleId() {
         return roleId;
@@ -13,11 +13,11 @@ public class RoleResource {
         this.roleId = roleId;
     }
 
-    public Long getResouceId() {
-        return resouceId;
+    public Long getResourceId() {
+        return resourceId;
     }
 
-    public void setResouceId(Long resouceId) {
-        this.resouceId = resouceId;
+    public void setResourceId(Long resourceId) {
+        this.resourceId = resourceId;
     }
 }

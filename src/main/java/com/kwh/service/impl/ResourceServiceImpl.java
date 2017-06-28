@@ -39,7 +39,7 @@ public class ResourceServiceImpl implements ResourceService {
 		List<RoleResource> roleResources = roleResourceMapper.selectByExample(example);
 		List<TreeNode> treeNodes = new ArrayList<>();
 		for (RoleResource roleResource : roleResources) {
-			Resource resource = resourceMapper.selectByPrimaryKey(roleResource.getResouceId());
+			Resource resource = resourceMapper.selectByPrimaryKey(roleResource.getResourceId());
 			TreeNode treeNode = new TreeNode();
 			treeNode.setName(resource.getResourceName());
 			treeNode.setUrl(resource.getResourceUrl());

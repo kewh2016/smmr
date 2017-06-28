@@ -5,14 +5,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>角色列表</title>
+<title>权限列表</title>
 </head>
 <body>
-	<ul>
-		<c:forEach items="${roles}" var="role">
-			<li>${role.roleName}|<a
-				href="${base}/authority/add?roleId=${role.id}">授权</a></li>
-		</c:forEach>
-	</ul>
+	<div>
+		<ul>
+			<c:forEach items="${roleResources}" var="rr">
+				<li>${rr.roleName }|${rr.resourceName }</li>
+			</c:forEach>
+		</ul>
+	</div>
 </body>
 </html>

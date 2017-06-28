@@ -5,24 +5,32 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>添加用户</title>
+<title>添加资源</title>
 </head>
 <body>
-	<form action="${base}/user/add" method="post">
+	<form action="${base}/resource/add" method="post">
 		<table>
 			<tr>
-				<td>用户号</td>
-				<td><input name="userNo"></td>
+				<td>资源名称</td>
+				<td><input name="resourceName"></td>
 			</tr>
 			<tr>
-				<td>密码</td>
-				<td><input name="password" type="password"></td>
+				<td>资源URL</td>
+				<td><input name="resourceUrl"></td>
 			</tr>
 			<tr>
-				<td>角色</td>
-				<td><select name="roleId">
-						<c:forEach items="${roles}" var="role">
-							<option value="${role.id }">${role.roleName}</option>
+				<td>资源类型</td>
+				<td><select name="type">
+						<option value="1">菜单</option>
+						<option value="2">操作</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td>上级资源</td>
+				<td><select name="parentId">
+						<option value="">无上级</option>
+						<c:forEach items="${resources}" var="resource">
+							<option value="${resource.id}">${resource.resourceName}</option>
 						</c:forEach>
 				</select></td>
 			</tr>
