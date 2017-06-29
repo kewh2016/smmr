@@ -24,6 +24,7 @@
 			<mvc:exclude-mapping path="/login" />
 			<mvc:exclude-mapping path="/logout" />
 			<mvc:exclude-mapping path="/resources/**" />
+			<mvc:exclude-mapping path="/messages/**" />
 			<bean class="com.kwh.interceptor.AuthenticationInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
@@ -41,6 +42,16 @@
 			</map>
 		</property>
 	</bean>
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<!-- 国际化信息所在的文件名 -->
+		<property name="basename" value="/messages/messages" />
+		<!-- 如果在国际化资源文件中找不到对应代码的信息，就用这个代码作为名称 -->
+		<property name="useCodeAsDefaultMessage" value="true" />
+	</bean>
+
+
 
 	<!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
 	<bean id="multipartResolver"
