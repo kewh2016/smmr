@@ -46,7 +46,7 @@ public class LoginController {
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index(Model model) {
-		List<TreeNode> menu = resourceService.getMenu(userService.getCurrentUser());
+		List<TreeNode> menu = resourceService.getMenu(userService.getCurrentUser(),false);
 		model.addAttribute("menu", JsonUtils.parseJSON(menu));
 		return "index";
 	}

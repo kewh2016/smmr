@@ -30,7 +30,7 @@ public class ResourceServiceImpl implements ResourceService {
 	private RoleMapper roleMapper;
 
 	@Override
-	public List<TreeNode> getMenu(User user) {
+	public List<TreeNode> getMenu(User user, boolean getAll) {
 		Role role = roleMapper.selectByPrimaryKey(user.getRoleId());
 		if (role == null)
 			throw new BizRuntimeException("用户信息有误");
@@ -40,16 +40,25 @@ public class ResourceServiceImpl implements ResourceService {
 		List<TreeNode> treeNodes = new ArrayList<>();
 		for (RoleResource roleResource : roleResources) {
 			Resource resource = resourceMapper.selectByPrimaryKey(roleResource.getResourceId());
-			TreeNode treeNode = new TreeNode();
-			treeNode.setName(resource.getResourceName());
-			treeNode.setUrl(resource.getResourceUrl());
-			treeNode.setTarget("iframepage");
-			treeNode.setId(resource.getId());
-			if (null != resource.getParentId())
-				treeNode.setpId(resource.getParentId());
-			treeNodes.add(treeNode);
+			if (getAll) {
+				getTreeNode(treeNodes, resource);
+			} else {
+				if ("1".equals(resource.getType())) {// 1代表菜单，2代表操作
+					getTreeNode(treeNodes, resource);
+				}
+			}
 		}
 		return treeNodes;
+	}
+
+	private void getTreeNode(List<TreeNode> treeNodes, Resource resource) {
+		TreeNode treeNode = new TreeNode();
+		treeNode.setName(resource.getResourceName());
+		treeNode.setUrl(resource.getResourceUrl());
+		treeNode.setTarget("iframepage");
+		treeNode.setId(resource.getId());
+		treeNode.setpId(resource.getParentId());
+		treeNodes.add(treeNode);
 	}
 
 }

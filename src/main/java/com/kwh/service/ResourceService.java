@@ -7,6 +7,12 @@ import com.kwh.entity.User;
 
 public interface ResourceService {
 
-	List<TreeNode> getMenu(User user);
+	/**
+	 * 获取用户资源
+	 * @param user
+	 * @param getAll false仅仅获取菜单
+	 * @return
+	 */
+	List<TreeNode> getMenu(User user, boolean getAll);
 
 }

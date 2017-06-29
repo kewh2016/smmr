@@ -1,16 +1,24 @@
 package com.kwh.interceptor;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kwh.common.TreeNode;
 import com.kwh.constants.UserConstants;
 import com.kwh.entity.User;
+import com.kwh.service.ResourceService;
 
 public class AuthenticationInterceptor implements HandlerInterceptor {
+
+	@Autowired
+	private ResourceService resourceService;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -22,7 +30,12 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 			return false;
 		}
 		if (sessionUser instanceof User) {
-			return true;
+			User user = (User) sessionUser;
+			List<TreeNode> treeNodes = resourceService.getMenu(user, true);
+			for (TreeNode treeNode : treeNodes) {
+				if (request.getRequestURI().equals(treeNode.getUrl()))
+					return true;
+			}
 		}
 		response.sendRedirect(request.getContextPath() + "/login");
 		return false;

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-06-27 20:07:11
+Date: 2017-06-29 10:20:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,17 +26,23 @@ CREATE TABLE `t_resource` (
   `RESOURCE_NAME` varchar(128) DEFAULT NULL,
   `RESOURCE_URL` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=655 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_resource
 -- ----------------------------
-INSERT INTO `t_resource` VALUES ('1', null, '1', '用户管理', '');
+INSERT INTO `t_resource` VALUES ('1', null, '1', '用户管理', '/smmr/');
 INSERT INTO `t_resource` VALUES ('2', '1', '1', '用户列表', '/smmr/user/list');
 INSERT INTO `t_resource` VALUES ('3', '1', '1', '添加用户', '/smmr/user/add');
-INSERT INTO `t_resource` VALUES ('4', null, '1', '资源管理', null);
+INSERT INTO `t_resource` VALUES ('4', null, '1', '资源管理', '/smmr/');
 INSERT INTO `t_resource` VALUES ('5', '4', '1', '资源列表', '/smmr/resource/list');
 INSERT INTO `t_resource` VALUES ('6', '4', '1', '添加资源', '/smmr/resource/add');
+INSERT INTO `t_resource` VALUES ('7', null, '1', '权限管理', '/smmr/');
+INSERT INTO `t_resource` VALUES ('8', '7', '1', '权限列表', '/smmr/authority/list');
+INSERT INTO `t_resource` VALUES ('9', null, '1', '角色管理', '/smmr/');
+INSERT INTO `t_resource` VALUES ('10', '9', '1', '角色列表', '/smmr/role/list');
+INSERT INTO `t_resource` VALUES ('11', '9', '1', '添加角色', '/smmr/role/add');
+INSERT INTO `t_resource` VALUES ('12', null, '2', '进入主页', '/smmr/index');
 
 -- ----------------------------
 -- Table structure for t_role
@@ -47,7 +53,7 @@ CREATE TABLE `t_role` (
   `ROLE_NAME` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `I_ROLE_NAME` (`ROLE_NAME`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_role
@@ -61,9 +67,9 @@ INSERT INTO `t_role` VALUES ('1', '管理员');
 DROP TABLE IF EXISTS `t_role_resource`;
 CREATE TABLE `t_role_resource` (
   `ROLE_ID` bigint(20) DEFAULT NULL,
-  `RESOUCE_ID` bigint(20) DEFAULT NULL,
+  `RESOURCE_ID` bigint(20) DEFAULT NULL,
   KEY `I_ROLE_ID` (`ROLE_ID`) USING HASH,
-  KEY `I_RESOURCE_ID` (`RESOUCE_ID`) USING HASH
+  KEY `I_RESOURCE_ID` (`RESOURCE_ID`) USING HASH
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -77,6 +83,16 @@ INSERT INTO `t_role_resource` VALUES ('1', '3');
 INSERT INTO `t_role_resource` VALUES ('1', '4');
 INSERT INTO `t_role_resource` VALUES ('1', '5');
 INSERT INTO `t_role_resource` VALUES ('1', '6');
+INSERT INTO `t_role_resource` VALUES ('1', '7');
+INSERT INTO `t_role_resource` VALUES ('1', '8');
+INSERT INTO `t_role_resource` VALUES ('1', '9');
+INSERT INTO `t_role_resource` VALUES ('1', '10');
+INSERT INTO `t_role_resource` VALUES ('2', '5');
+INSERT INTO `t_role_resource` VALUES ('2', '9');
+INSERT INTO `t_role_resource` VALUES ('2', '10');
+INSERT INTO `t_role_resource` VALUES ('1', '11');
+INSERT INTO `t_role_resource` VALUES ('1', '12');
+INSERT INTO `t_role_resource` VALUES ('2', '12');
 
 -- ----------------------------
 -- Table structure for t_user
