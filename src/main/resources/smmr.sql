@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-06-29 10:20:14
+Date: 2017-07-02 12:20:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,7 +26,7 @@ CREATE TABLE `t_resource` (
   `RESOURCE_NAME` varchar(128) DEFAULT NULL,
   `RESOURCE_URL` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_resource
@@ -43,6 +43,9 @@ INSERT INTO `t_resource` VALUES ('9', null, '1', '角色管理', '/smmr/');
 INSERT INTO `t_resource` VALUES ('10', '9', '1', '角色列表', '/smmr/role/list');
 INSERT INTO `t_resource` VALUES ('11', '9', '1', '添加角色', '/smmr/role/add');
 INSERT INTO `t_resource` VALUES ('12', null, '2', '进入主页', '/smmr/index');
+INSERT INTO `t_resource` VALUES ('13', '7', '2', '授权', '/smmr/authority/add');
+INSERT INTO `t_resource` VALUES ('14', '7', '2', '添加权限', '/smmr/authority/addallow');
+INSERT INTO `t_resource` VALUES ('15', '7', '2', '移除权限', '/smmr/authority/remove');
 
 -- ----------------------------
 -- Table structure for t_role
@@ -93,6 +96,9 @@ INSERT INTO `t_role_resource` VALUES ('2', '10');
 INSERT INTO `t_role_resource` VALUES ('1', '11');
 INSERT INTO `t_role_resource` VALUES ('1', '12');
 INSERT INTO `t_role_resource` VALUES ('2', '12');
+INSERT INTO `t_role_resource` VALUES ('1', '13');
+INSERT INTO `t_role_resource` VALUES ('1', '14');
+INSERT INTO `t_role_resource` VALUES ('1', '15');
 
 -- ----------------------------
 -- Table structure for t_user
