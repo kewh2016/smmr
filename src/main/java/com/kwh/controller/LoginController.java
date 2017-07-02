@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.condition.ProducesRequestCondition;
 
 import com.kwh.common.TreeNode;
 import com.kwh.service.ResourceService;
@@ -49,5 +51,11 @@ public class LoginController {
 		List<TreeNode> menu = resourceService.getMenu(userService.getCurrentUser(),false);
 		model.addAttribute("menu", JsonUtils.parseJSON(menu));
 		return "index";
+	}
+	
+	@RequestMapping(value = "/nopermission", produces = {"application/json; charset=UTF-8"},method = RequestMethod.GET)
+	@ResponseBody
+	public String nopermission() {
+		return "没有权限！";
 	}
 }
