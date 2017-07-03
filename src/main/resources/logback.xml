@@ -5,8 +5,13 @@
 			<pattern>%-12d{HH:mm:ss.SSS}|%-5level|%-45logger{45}|%m%n</pattern>
 		</layout>
 	</appender>
-	<logger name="com.kwh.dao" level="debug" />
-	<root level="debug">
+	<appender name="mongodb" class="com.kwh.log.MongoDBAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%-12d{HH:mm:ss.SSS}|%-5level|%-45logger{45}|%m%n</pattern>
+		</layout>
+	</appender>
+	<root level="info">
 		<appender-ref ref="stdout" />
+		<appender-ref ref="mongodb" />
 	</root>
 </configuration>

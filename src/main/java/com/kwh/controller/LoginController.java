@@ -2,6 +2,8 @@ package com.kwh.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import com.kwh.utils.StringUtils;
 
 @Controller
 public class LoginController {
+    private static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired
 	private ResourceService resourceService;
@@ -48,6 +51,7 @@ public class LoginController {
 	public String index(Model model) {
 		List<TreeNode> menu = resourceService.getMenu(userService.getCurrentUser(),false);
 		model.addAttribute("menu", JsonUtils.parseJSON(menu));
+		LOG.info("进入首页");
 		return "index";
 	}
 }
