@@ -21,44 +21,50 @@ import com.kwh.utils.StringUtils;
 public class LoginController {
     private static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
 
-	@Autowired
-	private ResourceService resourceService;
+    @Autowired
+    private ResourceService resourceService;
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@RequestMapping(value = { "/login", "/" }, method = RequestMethod.GET)
-	public String login() {
-		return "login";
-	}
+    @RequestMapping(value = { "/login", "/" }, method = RequestMethod.GET)
+    public String login(String target, Model model) {
+        model.addAttribute("target", target);
+        return "login";
+    }
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginPost(String userNo, String password) {
-		if (StringUtils.isBlank(userNo, password)) {
-			return "login";
-		}
-		if (userService.authentication(userNo, password))
-			return "redirect:index";
-		return "login";
-	}
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String loginPost(String userNo, String password, String target) {
+        if (StringUtils.isBlank(userNo, password)) {
+            return "login?target=" + target;
+        }
+        if (userService.authentication(userNo, password)) {
+            if (StringUtils.isNotBlank(target) && !"/".equals(target)) {
+                return "redirect:" + target;
+            }
+            return "redirect:index";
+        }
+        return "login?target=" + target;
+    }
 
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(String userNo) {
-		userService.cancellation(userNo);
-		return "login";
-	}
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(String userNo) {
+        userService.cancellation(userNo);
+        return "login";
+    }
 
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String index(Model model) {
-		List<TreeNode> menu = resourceService.getMenu(userService.getCurrentUser(),false);
-		model.addAttribute("menu", JsonUtils.parseJSON(menu));
-		LOG.info("进入首页");
-		return "index";
-	}
-	
-	@RequestMapping(value = "/nopermission", produces = {"application/json; charset=UTF-8"},method = RequestMethod.GET)
-	@ResponseBody
-	public String nopermission() {
-		return "没有权限！";
-	}
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index(Model model) {
+        List<TreeNode> menu = resourceService.getMenu(userService.getCurrentUser(), false);
+        model.addAttribute("menu", JsonUtils.parseJSON(menu));
+        LOG.info("进入首页");
+        return "index";
+    }
+
+    @RequestMapping(value = "/nopermission", produces = {
+            "application/json; charset=UTF-8" }, method = RequestMethod.GET)
+    @ResponseBody
+    public String nopermission() {
+        return "没有权限！";
+    }
 }

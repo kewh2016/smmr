@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-07-02 12:20:16
+Date: 2017-07-03 11:09:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,15 +31,15 @@ CREATE TABLE `t_resource` (
 -- ----------------------------
 -- Records of t_resource
 -- ----------------------------
-INSERT INTO `t_resource` VALUES ('1', null, '1', '用户管理', '/smmr/');
+INSERT INTO `t_resource` VALUES ('1', null, '1', '用户管理', null);
 INSERT INTO `t_resource` VALUES ('2', '1', '1', '用户列表', '/smmr/user/list');
 INSERT INTO `t_resource` VALUES ('3', '1', '1', '添加用户', '/smmr/user/add');
-INSERT INTO `t_resource` VALUES ('4', null, '1', '资源管理', '/smmr/');
+INSERT INTO `t_resource` VALUES ('4', null, '1', '资源管理', null);
 INSERT INTO `t_resource` VALUES ('5', '4', '1', '资源列表', '/smmr/resource/list');
 INSERT INTO `t_resource` VALUES ('6', '4', '1', '添加资源', '/smmr/resource/add');
-INSERT INTO `t_resource` VALUES ('7', null, '1', '权限管理', '/smmr/');
+INSERT INTO `t_resource` VALUES ('7', null, '1', '权限管理', null);
 INSERT INTO `t_resource` VALUES ('8', '7', '1', '权限列表', '/smmr/authority/list');
-INSERT INTO `t_resource` VALUES ('9', null, '1', '角色管理', '/smmr/');
+INSERT INTO `t_resource` VALUES ('9', null, '1', '角色管理', null);
 INSERT INTO `t_resource` VALUES ('10', '9', '1', '角色列表', '/smmr/role/list');
 INSERT INTO `t_resource` VALUES ('11', '9', '1', '添加角色', '/smmr/role/add');
 INSERT INTO `t_resource` VALUES ('12', null, '2', '进入主页', '/smmr/index');
@@ -99,6 +99,9 @@ INSERT INTO `t_role_resource` VALUES ('2', '12');
 INSERT INTO `t_role_resource` VALUES ('1', '13');
 INSERT INTO `t_role_resource` VALUES ('1', '14');
 INSERT INTO `t_role_resource` VALUES ('1', '15');
+INSERT INTO `t_role_resource` VALUES ('2', '7');
+INSERT INTO `t_role_resource` VALUES ('2', '8');
+INSERT INTO `t_role_resource` VALUES ('2', '4');
 
 -- ----------------------------
 -- Table structure for t_user
