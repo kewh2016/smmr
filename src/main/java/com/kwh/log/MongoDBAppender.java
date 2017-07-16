@@ -1,4 +1,4 @@
-package com.kwh.log;
+/*package com.kwh.log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,7 +7,7 @@ import com.mongodb.BasicDBObject;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 
-/**
+*//**
  * 
  * 
  * 类说明:自定义Mongodb输出类
@@ -15,7 +15,7 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
  * @author 作者 LzwGlory
  * @version 创建时间：2016年2月22日 下午3:59:14
  *
- */
+ *//*
 public class MongoDBAppender extends MongoDBAppenderBase<ILoggingEvent> {
 
     public MongoDBAppender() {
@@ -36,3 +36,4 @@ public class MongoDBAppender extends MongoDBAppenderBase<ILoggingEvent> {
         return doc;
     }
 }
+*/

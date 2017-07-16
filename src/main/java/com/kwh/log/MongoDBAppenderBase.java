@@ -1,4 +1,4 @@
-package com.kwh.log;
+/*package com.kwh.log;
 
 import java.net.UnknownHostException;
 
@@ -11,7 +11,7 @@ import com.mongodb.ServerAddress;
 
 import ch.qos.logback.core.UnsynchronizedAppenderBase;
 
-/**
+*//**
  * 
  * 
  * 类说明:logback的日志扩展基础类
@@ -19,7 +19,7 @@ import ch.qos.logback.core.UnsynchronizedAppenderBase;
  * @author 作者 LzwGlory
  * @version 创建时间：2016年2月22日 下午3:58:14 
  *
- */
+ *//*
 public abstract class MongoDBAppenderBase<E> extends
 		UnsynchronizedAppenderBase<E> {
 
@@ -168,4 +168,4 @@ public abstract class MongoDBAppenderBase<E> extends
 		this.fsync = fsync;
 	}
 
-}
+}*/
