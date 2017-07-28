@@ -28,8 +28,9 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping(value = { "/login", "/" }, method = RequestMethod.GET)
-    public String login(String target, Model model) {
+    public String login(String target, Model model,String error) {
         model.addAttribute("target", target);
+        model.addAttribute("error", error);
         return "login";
     }
 
@@ -44,7 +45,7 @@ public class LoginController {
             }
             return "redirect:index";
         }
-        return "login?target=" + target;
+        return "redirect:login?error=1&target=" + target;
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)

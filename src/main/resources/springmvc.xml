@@ -39,7 +39,7 @@
 		<property name="suffix" value=".jsp" />
 		<property name="attributes">
 			<map>
-				<entry key="base" value="/smmr"></entry>
+				<entry key="base" value=""></entry>
 			</map>
 		</property>
 	</bean>

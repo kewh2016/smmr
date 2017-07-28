@@ -9,21 +9,23 @@
 <%@ include file="common/resources.jsp"%>
 </head>
 <body>
-	<div style="margin: 300px auto; width: 300px;">
+	<div style="margin: 300px auto; width: 300px;text-align: center;">
+		<div style="margin: 0 auto;color: red;">
+			<c:if test="${not empty error}">用户名或密码错误！</c:if>
+		</div>
 		<form action="${base}/login" method="post">
 			<input name="target" value="${target}" type="hidden" />
-			<table>
+			<table style="width: 100%">
 				<tr>
-					<td><spring:message code="login.user.name" /></td>
+					<td style="text-align: right;"><spring:message code="login.user.name" /></td>
 					<td><input name="userNo" type="text" /></td>
 				</tr>
 				<tr>
-					<td><spring:message code="login.user.password" /></td>
+					<td style="text-align: right;"><spring:message code="login.user.password" /></td>
 					<td><input name="password" type="password" /></td>
 				</tr>
 				<tr>
-					<td></td>
-					<td><input type="submit"
+					<td colspan="2"><input type="submit"
 						value="<spring:message code="login.user.submit"/>"></td>
 				</tr>
 			</table>
