@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-07-03 11:09:05
+Date: 2017-07-28 09:52:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,26 +26,30 @@ CREATE TABLE `t_resource` (
   `RESOURCE_NAME` varchar(128) DEFAULT NULL,
   `RESOURCE_URL` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_resource
 -- ----------------------------
 INSERT INTO `t_resource` VALUES ('1', null, '1', '用户管理', null);
-INSERT INTO `t_resource` VALUES ('2', '1', '1', '用户列表', '/smmr/user/list');
-INSERT INTO `t_resource` VALUES ('3', '1', '1', '添加用户', '/smmr/user/add');
+INSERT INTO `t_resource` VALUES ('2', '1', '1', '用户列表', '/user/list');
+INSERT INTO `t_resource` VALUES ('3', '1', '1', '添加用户', '/user/add');
 INSERT INTO `t_resource` VALUES ('4', null, '1', '资源管理', null);
-INSERT INTO `t_resource` VALUES ('5', '4', '1', '资源列表', '/smmr/resource/list');
-INSERT INTO `t_resource` VALUES ('6', '4', '1', '添加资源', '/smmr/resource/add');
+INSERT INTO `t_resource` VALUES ('5', '4', '1', '资源列表', '/resource/list');
+INSERT INTO `t_resource` VALUES ('6', '4', '1', '添加资源', '/resource/add');
 INSERT INTO `t_resource` VALUES ('7', null, '1', '权限管理', null);
-INSERT INTO `t_resource` VALUES ('8', '7', '1', '权限列表', '/smmr/authority/list');
+INSERT INTO `t_resource` VALUES ('8', '7', '1', '权限列表', '/authority/list');
 INSERT INTO `t_resource` VALUES ('9', null, '1', '角色管理', null);
-INSERT INTO `t_resource` VALUES ('10', '9', '1', '角色列表', '/smmr/role/list');
-INSERT INTO `t_resource` VALUES ('11', '9', '1', '添加角色', '/smmr/role/add');
-INSERT INTO `t_resource` VALUES ('12', null, '2', '进入主页', '/smmr/index');
-INSERT INTO `t_resource` VALUES ('13', '7', '2', '授权', '/smmr/authority/add');
-INSERT INTO `t_resource` VALUES ('14', '7', '2', '添加权限', '/smmr/authority/addallow');
-INSERT INTO `t_resource` VALUES ('15', '7', '2', '移除权限', '/smmr/authority/remove');
+INSERT INTO `t_resource` VALUES ('10', '9', '1', '角色列表', '/role/list');
+INSERT INTO `t_resource` VALUES ('11', '9', '1', '添加角色', '/role/add');
+INSERT INTO `t_resource` VALUES ('12', null, '2', '进入主页', '/index');
+INSERT INTO `t_resource` VALUES ('13', '7', '2', '授权', '/authority/add');
+INSERT INTO `t_resource` VALUES ('14', '7', '2', '添加权限', '/authority/addallow');
+INSERT INTO `t_resource` VALUES ('15', '7', '2', '移除权限', '/authority/remove');
+INSERT INTO `t_resource` VALUES ('16', null, '1', '文件管理', '');
+INSERT INTO `t_resource` VALUES ('17', '16', '1', '上传文件', '/upload');
+INSERT INTO `t_resource` VALUES ('18', '16', '1', '文件列表', '/files');
+INSERT INTO `t_resource` VALUES ('19', '16', '2', '文件下载', '/load');
 
 -- ----------------------------
 -- Table structure for t_role
@@ -78,8 +82,6 @@ CREATE TABLE `t_role_resource` (
 -- ----------------------------
 -- Records of t_role_resource
 -- ----------------------------
-INSERT INTO `t_role_resource` VALUES ('2', '1');
-INSERT INTO `t_role_resource` VALUES ('2', '2');
 INSERT INTO `t_role_resource` VALUES ('1', '1');
 INSERT INTO `t_role_resource` VALUES ('1', '2');
 INSERT INTO `t_role_resource` VALUES ('1', '3');
@@ -90,18 +92,20 @@ INSERT INTO `t_role_resource` VALUES ('1', '7');
 INSERT INTO `t_role_resource` VALUES ('1', '8');
 INSERT INTO `t_role_resource` VALUES ('1', '9');
 INSERT INTO `t_role_resource` VALUES ('1', '10');
-INSERT INTO `t_role_resource` VALUES ('2', '5');
-INSERT INTO `t_role_resource` VALUES ('2', '9');
-INSERT INTO `t_role_resource` VALUES ('2', '10');
 INSERT INTO `t_role_resource` VALUES ('1', '11');
 INSERT INTO `t_role_resource` VALUES ('1', '12');
 INSERT INTO `t_role_resource` VALUES ('2', '12');
 INSERT INTO `t_role_resource` VALUES ('1', '13');
 INSERT INTO `t_role_resource` VALUES ('1', '14');
 INSERT INTO `t_role_resource` VALUES ('1', '15');
-INSERT INTO `t_role_resource` VALUES ('2', '7');
-INSERT INTO `t_role_resource` VALUES ('2', '8');
-INSERT INTO `t_role_resource` VALUES ('2', '4');
+INSERT INTO `t_role_resource` VALUES ('1', '16');
+INSERT INTO `t_role_resource` VALUES ('2', '16');
+INSERT INTO `t_role_resource` VALUES ('1', '17');
+INSERT INTO `t_role_resource` VALUES ('1', '18');
+INSERT INTO `t_role_resource` VALUES ('1', '19');
+INSERT INTO `t_role_resource` VALUES ('2', '19');
+INSERT INTO `t_role_resource` VALUES ('2', '17');
+INSERT INTO `t_role_resource` VALUES ('2', '18');
 
 -- ----------------------------
 -- Table structure for t_user
@@ -116,10 +120,10 @@ CREATE TABLE `t_user` (
   UNIQUE KEY `I_USER_NO` (`USER_NO`) USING BTREE,
   KEY `F_ROLE_ID` (`ROLE_ID`),
   CONSTRAINT `F_ROLE_ID` FOREIGN KEY (`ROLE_ID`) REFERENCES `t_role` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=145 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('135', 'admin', 'd82494f05d6917ba02f7aaa29689ccb444bb73f20380876cb05d1f37537b7892', '1');
-INSERT INTO `t_user` VALUES ('140', 'kewh', '84468101c11cc6160edaa813e8068cba404c61676f0082eff465fbf55292cb0c', '2');
+INSERT INTO `t_user` VALUES ('141', 'video', 'b46407c3386ce77fe01488a67a3112e1c374f1e3378297330c657aa9f03368a1', '2');
+INSERT INTO `t_user` VALUES ('144', 'root', '0242c0436daa4c241ca8a793764b7dfb50c223121bb844cf49be670a3af4dd18', '1');
