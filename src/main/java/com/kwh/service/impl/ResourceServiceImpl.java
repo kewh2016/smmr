@@ -20,45 +20,45 @@ import com.kwh.service.ResourceService;
 
 @Service
 public class ResourceServiceImpl implements ResourceService {
-	@Autowired
-	private ResourceMapper resourceMapper;
+    @Autowired
+    private ResourceMapper resourceMapper;
 
-	@Autowired
-	private RoleResourceMapper roleResourceMapper;
+    @Autowired
+    private RoleResourceMapper roleResourceMapper;
 
-	@Autowired
-	private RoleMapper roleMapper;
+    @Autowired
+    private RoleMapper roleMapper;
 
-	@Override
-	public List<TreeNode> getMenu(User user, boolean getAll) {
-		Role role = roleMapper.selectByPrimaryKey(user.getRoleId());
-		if (role == null)
-			throw new BizRuntimeException("用户信息有误");
-		RoleResourceExample example = new RoleResourceExample();
-		example.createCriteria().andRoleIdEqualTo(role.getId());
-		List<RoleResource> roleResources = roleResourceMapper.selectByExample(example);
-		List<TreeNode> treeNodes = new ArrayList<>();
-		for (RoleResource roleResource : roleResources) {
-			Resource resource = resourceMapper.selectByPrimaryKey(roleResource.getResourceId());
-			if (getAll) {
-				getTreeNode(treeNodes, resource);
-			} else {
-				if ("1".equals(resource.getType())) {// 1代表菜单，2代表操作
-					getTreeNode(treeNodes, resource);
-				}
-			}
-		}
-		return treeNodes;
-	}
+    @Override
+    public List<TreeNode> getMenu(User user, boolean getAll) {
+        Role role = roleMapper.selectByPrimaryKey(user.getRoleId());
+        if (role == null)
+            throw new BizRuntimeException("用户信息有误");
+        RoleResourceExample example = new RoleResourceExample();
+        example.createCriteria().andRoleIdEqualTo(role.getId());
+        List<RoleResource> roleResources = roleResourceMapper.selectByExample(example);
+        List<TreeNode> treeNodes = new ArrayList<>();
+        for (RoleResource roleResource : roleResources) {
+            Resource resource = resourceMapper.selectByPrimaryKey(roleResource.getResourceId());
+            if (getAll) {
+                getTreeNode(treeNodes, resource);
+            } else {
+                if ("1".equals(resource.getType())) {// 1代表菜单，2代表操作
+                    getTreeNode(treeNodes, resource);
+                }
+            }
+        }
+        return treeNodes;
+    }
 
-	private void getTreeNode(List<TreeNode> treeNodes, Resource resource) {
-		TreeNode treeNode = new TreeNode();
-		treeNode.setName(resource.getResourceName());
-		treeNode.setUrl(resource.getResourceUrl());
-		treeNode.setTarget("iframepage");
-		treeNode.setId(resource.getId());
-		treeNode.setpId(resource.getParentId());
-		treeNodes.add(treeNode);
-	}
+    private void getTreeNode(List<TreeNode> treeNodes, Resource resource) {
+        TreeNode treeNode = new TreeNode();
+        treeNode.setName(resource.getResourceName());
+        treeNode.setUrl(resource.getResourceUrl());
+        treeNode.setTarget("iframepage");
+        treeNode.setId(resource.getId());
+        treeNode.setpId(resource.getParentId());
+        treeNodes.add(treeNode);
+    }
 
 }

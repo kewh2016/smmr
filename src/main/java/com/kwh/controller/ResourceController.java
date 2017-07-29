@@ -13,24 +13,24 @@ import com.kwh.entity.Resource;
 @RequestMapping("/resource")
 public class ResourceController {
 
-	@Autowired
-	private ResourceMapper resourceMapper;
+    @Autowired
+    private ResourceMapper resourceMapper;
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model) {
-		model.addAttribute("resources", resourceMapper.selectByExample(null));
-		return "resource/list";
-	}
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String list(Model model) {
+        model.addAttribute("resources", resourceMapper.selectByExample(null));
+        return "resource/list";
+    }
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String addUser(Model model) {
-		model.addAttribute("resources", resourceMapper.selectByExample(null));
-		return "resource/add";
-	}
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String addUser(Model model) {
+        model.addAttribute("resources", resourceMapper.selectByExample(null));
+        return "resource/add";
+    }
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addUser(Resource resource) {
-		resourceMapper.insert(resource);
-		return "redirect:list";
-	}
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addUser(Resource resource) {
+        resourceMapper.insert(resource);
+        return "redirect:list";
+    }
 }

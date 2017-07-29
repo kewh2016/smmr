@@ -15,29 +15,29 @@ import com.kwh.entity.User;
 @RequestMapping("/user")
 public class UserController {
 
-	@Autowired
-	private UserMapper userMapper;
+    @Autowired
+    private UserMapper userMapper;
 
-	@Autowired
-	private RoleMapper roleMapper;
+    @Autowired
+    private RoleMapper roleMapper;
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model) {
-		model.addAttribute("users", userMapper.selectByExample(null));
-		model.addAttribute("roles", roleMapper.selectByExample(null));
-		return "user/list";
-	}
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String list(Model model) {
+        model.addAttribute("users", userMapper.selectByExample(null));
+        model.addAttribute("roles", roleMapper.selectByExample(null));
+        return "user/list";
+    }
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String addUser(Model model) {
-		model.addAttribute("roles", roleMapper.selectByExample(null));
-		return "user/add";
-	}
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String addUser(Model model) {
+        model.addAttribute("roles", roleMapper.selectByExample(null));
+        return "user/add";
+    }
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addUser(User user) {
-		user.setPassword(DigestUtils.sha256Hex(user.getUserNo() + user.getPassword()));
-		userMapper.insert(user);
-		return "redirect:list";
-	}
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addUser(User user) {
+        user.setPassword(DigestUtils.sha256Hex(user.getUserNo() + user.getPassword()));
+        userMapper.insert(user);
+        return "redirect:list";
+    }
 }

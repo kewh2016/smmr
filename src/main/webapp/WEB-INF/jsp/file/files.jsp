@@ -10,7 +10,7 @@
 <body>
 	<ol>
 		<c:forEach items="${files}" var="file">
-			<li><a href="${base}/load?path=${file.path}">${file.name}</a></li>
+			<li><a href="${base}/load?id=${file.id}">${file.name}</a></li>
 		</c:forEach>
 	</ol>
 </body>

@@ -13,24 +13,23 @@ import com.kwh.entity.Role;
 @RequestMapping("/role")
 public class RoleController {
 
+    @Autowired
+    private RoleMapper roleMapper;
 
-	@Autowired
-	private RoleMapper roleMapper;
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String list(Model model) {
+        model.addAttribute("roles", roleMapper.selectByExample(null));
+        return "role/list";
+    }
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model) {
-		model.addAttribute("roles", roleMapper.selectByExample(null));
-		return "role/list";
-	}
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String addUser() {
+        return "role/add";
+    }
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String addUser() {
-		return "role/add";
-	}
-
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addUser(Role role) {
-		roleMapper.insert(role);
-		return "redirect:list";
-	}
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addUser(Role role) {
+        roleMapper.insert(role);
+        return "redirect:list";
+    }
 }

@@ -9,7 +9,7 @@
 		<commentGenerator>
 			<property name="suppressAllComments" value="true" />
 		</commentGenerator>
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/smmr" userId="root" password="root" />
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/smmr" userId="root" password="kwh813539" />
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
@@ -31,6 +31,7 @@
 		<table schema="mysql" tableName="t_resource" domainObjectName="Resource" />
 		<table schema="mysql" tableName="t_role" domainObjectName="Role" />
 		<table schema="mysql" tableName="t_role_resource" domainObjectName="RoleResource" />
+		<table schema="mysql" tableName="t_image" domainObjectName="Image" />
 
 	</context>
 </generatorConfiguration>

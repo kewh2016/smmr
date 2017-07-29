@@ -28,7 +28,7 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping(value = { "/login", "/" }, method = RequestMethod.GET)
-    public String login(String target, Model model,String error) {
+    public String login(String target, Model model, String error) {
         model.addAttribute("target", target);
         model.addAttribute("error", error);
         return "login";

@@ -21,43 +21,43 @@ import com.kwh.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-	private UserMapper userMapper;
+    @Autowired
+    private UserMapper userMapper;
 
-	@Override
-	public boolean authentication(String userNo, String password) {
-		User user = getUserByUserNo(userNo);
-		if (user == null)
-			return false;
-		if (DigestUtils.sha256Hex(password + userNo).equals(user.getPassword())) {
-			getSession().setAttribute(UserConstants.SESSION_USER, user);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean authentication(String userNo, String password) {
+        User user = getUserByUserNo(userNo);
+        if (user == null)
+            return false;
+        if (DigestUtils.sha256Hex(password + userNo).equals(user.getPassword())) {
+            getSession().setAttribute(UserConstants.SESSION_USER, user);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public void cancellation(String userNo) {
-		getSession().removeAttribute(UserConstants.SESSION_USER);
-	}
+    @Override
+    public void cancellation(String userNo) {
+        getSession().removeAttribute(UserConstants.SESSION_USER);
+    }
 
-	@Override
-	public User getUserByUserNo(String userNo) {
-		UserExample userExample = new UserExample();
-		userExample.createCriteria().andUserNoEqualTo(userNo);
-		List<User> users = userMapper.selectByExample(userExample);
-		return CollectionUtils.isEmpty(users) ? null : users.get(0);
-	}
+    @Override
+    public User getUserByUserNo(String userNo) {
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andUserNoEqualTo(userNo);
+        List<User> users = userMapper.selectByExample(userExample);
+        return CollectionUtils.isEmpty(users) ? null : users.get(0);
+    }
 
-	@Override
-	public User getCurrentUser() {
-		return (User) getSession().getAttribute(UserConstants.SESSION_USER);
-	}
+    @Override
+    public User getCurrentUser() {
+        return (User) getSession().getAttribute(UserConstants.SESSION_USER);
+    }
 
-	private HttpSession getSession() {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
-				.getRequest();
-		return request.getSession();
-	}
+    private HttpSession getSession() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
+                .getRequest();
+        return request.getSession();
+    }
 
 }

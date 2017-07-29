@@ -15,41 +15,41 @@ import com.kwh.entity.RoleResourceExample;
 @Controller
 @RequestMapping("/authority")
 public class AuthorityController {
-	@Autowired
-	private RoleResourceMapper roleResourceMapper;
+    @Autowired
+    private RoleResourceMapper roleResourceMapper;
 
-	@Autowired
-	private RoleMapper roleMapper;
+    @Autowired
+    private RoleMapper roleMapper;
 
-	@Autowired
-	private RoleResourceExtMapper roleResourceExtMapper;
+    @Autowired
+    private RoleResourceExtMapper roleResourceExtMapper;
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model) {
-		model.addAttribute("roleResources", roleResourceExtMapper.getRoleResources(null));
-		return "authority/list";
-	}
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String list(Model model) {
+        model.addAttribute("roleResources", roleResourceExtMapper.getRoleResources(null));
+        return "authority/list";
+    }
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String add(Model model, String roleId) {
-		model.addAttribute("role", roleMapper.selectByPrimaryKey(Long.parseLong(roleId)));
-		model.addAttribute("roleResources", roleResourceExtMapper.getRoleResources(roleId));
-		model.addAttribute("resources", roleResourceExtMapper.getRoleNotAllowResources(roleId));
-		return "authority/add";
-	}
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String add(Model model, String roleId) {
+        model.addAttribute("role", roleMapper.selectByPrimaryKey(Long.parseLong(roleId)));
+        model.addAttribute("roleResources", roleResourceExtMapper.getRoleResources(roleId));
+        model.addAttribute("resources", roleResourceExtMapper.getRoleNotAllowResources(roleId));
+        return "authority/add";
+    }
 
-	@RequestMapping(value = "/addallow", method = RequestMethod.GET)
-	public String add(RoleResource roleResource) {
-		roleResourceMapper.insert(roleResource);
-		return "redirect:add?roleId=" + roleResource.getRoleId();
-	}
+    @RequestMapping(value = "/addallow", method = RequestMethod.GET)
+    public String add(RoleResource roleResource) {
+        roleResourceMapper.insert(roleResource);
+        return "redirect:add?roleId=" + roleResource.getRoleId();
+    }
 
-	@RequestMapping(value = "/remove", method = RequestMethod.GET)
-	public String remove(RoleResource roleResource) {
-		RoleResourceExample example = new RoleResourceExample();
-		example.createCriteria().andRoleIdEqualTo(roleResource.getRoleId())
-				.andResourceIdEqualTo(roleResource.getResourceId());
-		roleResourceMapper.deleteByExample(example);
-		return "redirect:add?roleId=" + roleResource.getRoleId();
-	}
+    @RequestMapping(value = "/remove", method = RequestMethod.GET)
+    public String remove(RoleResource roleResource) {
+        RoleResourceExample example = new RoleResourceExample();
+        example.createCriteria().andRoleIdEqualTo(roleResource.getRoleId())
+                .andResourceIdEqualTo(roleResource.getResourceId());
+        roleResourceMapper.deleteByExample(example);
+        return "redirect:add?roleId=" + roleResource.getRoleId();
+    }
 }
