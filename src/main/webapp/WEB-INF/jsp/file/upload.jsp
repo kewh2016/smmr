@@ -6,17 +6,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>文件上传</title>
+<%@ include file="../common/resources.jsp"%>
+<style type="text/css">
+.main{margin-top: 10px;margin-left: 10px;}
+</style>
 </head>
 <body>
-	<form action="${base}/upload" method="post"
-		enctype="multipart/form-data">
-		<input type="file" name="file" id="file" accept="image/*" onchange="readAsDataURL()"/> <input disabled="disabled" id="submit" type="submit" value="提交" />
-	</form>
-	<div id="result"></div>
+	<div class="main">
+		<form action="${base}/upload" method="post"
+			enctype="multipart/form-data" role="form">
+			<div class="form-group">
+				<input type="file" name="file" id="file" accept="image/*"
+					onchange="readAsDataURL()" />
+			</div>
+			<div class="form-group">
+				<input disabled="disabled" id="submit" type="submit" value="提交"
+					class="btn btn-default" />
+			</div>
+		</form>
+		<div id="result"></div>
+	</div>
 	<script type="text/javascript">
-		if (typeof FileReader == 'undefined') {
-			result.innerHTML = "抱歉，你的浏览器不支持FileReader";
-		}
 		// 将文件以Data URL形式进行读入页面
 		function readAsDataURL() {
 			var result = document.getElementById("result");
@@ -30,7 +40,6 @@
 			// 将文件以Data URL形式进行读入页面
 			reader.readAsDataURL(simpleFile);
 			reader.onload = function(e) {
-				console.log(this.result);
 				document.getElementById("submit").removeAttribute("disabled");
 				result.innerHTML = '<img src="'+this.result+'" alt=""/>';
 			}

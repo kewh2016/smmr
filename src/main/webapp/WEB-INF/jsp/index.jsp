@@ -7,6 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>首页</title>
 <%@ include file="common/resources.jsp"%>
+<style type="text/css">
+.pull-left{width: 20%;margin: 0;padding: 0;}
+.pull-right{width: 80%;margin: 0;padding: 0;}
+#iframepage{width: 100%;border: none;}
+</style>
 </head>
 <body>
 	<script type="text/javascript">
@@ -22,14 +27,22 @@
 			$.fn.zTree.init($("#menu"), setting, zNodes);
 		});
 	</script>
-	<a href="${base}/logout">注销</a>
-	<div class="zTreeDemoBackground left"
-		style="width: 15%; float: left; position: fixed;">
-		<ul id="menu" class="ztree"></ul>
+	<div>
+		<div class="pull-left panel panel-default">
+			<a class="btn btn-warning" href="${base}/logout">注销</a>
+			<ul id="menu" class="ztree"></ul>
+		</div>
+		<div class="pull-right">
+			<iframe id="iframepage" name="iframepage"></iframe>
+		</div>
 	</div>
-	<div class="right">
-		<iframe id="iframepage" name="iframepage"
-			style="width: 80%; height: 700px; position: fixed; top: 0; right: 0"></iframe>
-	</div>
+	<script type="text/javascript">
+		window.onload=function(){
+			var windowHeight = $(window).height()-6;
+			console.log(windowHeight)
+			$(".pull-left").height(windowHeight);
+			$("#iframepage").height(windowHeight);
+		}
+	</script>
 </body>
 </html>
