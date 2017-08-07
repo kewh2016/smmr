@@ -11,6 +11,19 @@
 .center-vertical {
 	width: 300px;
 }
+
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	display: flex;
+	align-items: center; /*定义body的元素垂直居中*/
+	justify-content: center; /*定义body的里的元素水平居中*/
+}
 </style>
 </head>
 <body>
@@ -37,14 +50,5 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-		function resize() {
-			var windowHeight = $(window).height();
-			var boxHeight = $(".center-vertical").height();
-			$(".center-vertical").css("margin-top",
-					(windowHeight - boxHeight) / 2);
-		}
-		window.resize = resize();
-	</script>
 </body>
 </html>
